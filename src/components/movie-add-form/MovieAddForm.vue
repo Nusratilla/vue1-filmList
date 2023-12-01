@@ -1,6 +1,6 @@
 <template >
   <div>
-    <h1>Search Panel</h1>
+    <h1>Movie Add Form</h1>
   </div>
 </template>
 <script>
@@ -8,4 +8,4 @@ export default {
 
 }
 </script>
-<style scoped></style>
+<style ></style>
