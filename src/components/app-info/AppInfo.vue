@@ -1,12 +1,23 @@
 <template>
   <div class="app-info">
-    <p class="fs3 text-uppercase">All Movies: 0</p>
-    <p class="fs4 text-uppercase">Watched: 0</p>
+    <p class="fs3 text-uppercase">All Movies: {{ allMouviesCount }}</p>
+    <p class="fs4 text-uppercase">Favourite Movies: {{ favouriteMoviesCount }}</p>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    allMouviesCount: {
+      type: Number,
+      required: true,
+    },
+    favouriteMoviesCount: {
+      type: Number,
+      required: true,
+    }
+  }
+}
 </script>
 
 <style scoped>
