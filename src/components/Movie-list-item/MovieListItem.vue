@@ -5,7 +5,7 @@
     <span @click="onLike" class="list-group-item-label">{{ movie.name }}</span>
     <input type="number" class="list-group-item-input" v-bind:value="movie.viewers">
     <div class="d-flex justify-content-center align-items-center">
-      <button type="button" class="btn-cookie btn-sm">
+      <button @click="$emit('onFavourite', movie.id)" type="button" class="btn-cookie btn-sm">
         <i class="bi bi-cookie"></i>
       </button>
 
