@@ -22,6 +22,7 @@ export default {
   methods: {
     addMovie(e) {
       e.preventDefault()
+      if (!this.name || !this.viewed) return
       const newMovie = {
         name: this.name,
         viewers: this.viewed,

@@ -4,10 +4,11 @@
     <div class="content">
       <AppInfo :allMouviesCount="movies.length" :favouriteMoviesCount="movies.filter(c => c.favourite).length" />
       <div class="search-panel">
-        <SearchPanel />
+        <SearchPanel :updateTermHandler="updateTermHandler" />
         <AppFilter />
       </div>
-      <MovieList :movies="movies" @onLike="onLikeHandler" @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
+      <MovieList :movies="onSearchHandler(movies, term)" @onLike="onLikeHandler" @onFavourite="onFavouriteHandler"
+        @onRemove="onRemoveHandler" />
       <MovieAddForm @createMovie="createMovie" />
 
     </div>
@@ -53,7 +54,8 @@ export default {
           like: true,
           id: 3
         }
-      ]
+      ],
+      term: "",
     }
   },
   methods: {
@@ -78,6 +80,15 @@ export default {
     },
     onRemoveHandler(id) {
       this.movies = this.movies.filter(c => c.id !== id)
+    },
+    onSearchHandler(arr, term) {
+      if (term.length == 0) {
+        return arr
+      }
+      return arr.filter(c => c.name.toLowerCase().indexOf(term) > -1)
+    },
+    updateTermHandler(term) {
+      this.term = term
     }
   },
 }
