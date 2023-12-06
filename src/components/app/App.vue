@@ -5,10 +5,10 @@
       <AppInfo :allMouviesCount="movies.length" :favouriteMoviesCount="movies.filter(c => c.favourite).length" />
       <div class="search-panel">
         <SearchPanel :updateTermHandler="updateTermHandler" />
-        <AppFilter />
+        <AppFilter :updateFilterHandler="updateFilterHandler" :filterName="filter" />
       </div>
-      <MovieList :movies="onSearchHandler(movies, term)" @onLike="onLikeHandler" @onFavourite="onFavouriteHandler"
-        @onRemove="onRemoveHandler" />
+      <MovieList :movies="onFilterHandler(onSearchHandler(movies, term), filter)" @onLike="onLikeHandler"
+        @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
       <MovieAddForm @createMovie="createMovie" />
 
     </div>
@@ -42,7 +42,7 @@ export default {
         },
         {
           name: 'Amir Temur',
-          viewers: 951,
+          viewers: 451,
           favourite: true,
           like: false,
           id: 2
@@ -56,6 +56,7 @@ export default {
         }
       ],
       term: "",
+      filter: 'all',
     }
   },
   methods: {
@@ -87,8 +88,21 @@ export default {
       }
       return arr.filter(c => c.name.toLowerCase().indexOf(term) > -1)
     },
+    onFilterHandler(arr, filter) {
+      switch (filter) {
+        case 'liked':
+          return arr.filter(c => c.like)
+        case 'mostViewed':
+          return arr.filter(c => c.viewers > 500)
+        default:
+          return arr
+      }
+    },
     updateTermHandler(term) {
       this.term = term
+    },
+    updateFilterHandler(filter) {
+      this.filter = filter
     }
   },
 }
