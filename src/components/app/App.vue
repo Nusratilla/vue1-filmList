@@ -7,7 +7,7 @@
         <SearchPanel />
         <AppFilter />
       </div>
-      <MovieList :movies="movies" @onLike="onLikeHandler" @onFavourite="onFavouriteHandler" />
+      <MovieList :movies="movies" @onLike="onLikeHandler" @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
       <MovieAddForm @createMovie="createMovie" />
 
     </div>
@@ -76,6 +76,9 @@ export default {
         return item
       })
     },
+    onRemoveHandler(id) {
+      this.movies = this.movies.filter(c => c.id !== id)
+    }
   },
 }
 </script>

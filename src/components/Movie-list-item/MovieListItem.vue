@@ -9,7 +9,7 @@
         <i class="bi bi-cookie"></i>
       </button>
 
-      <button type="button" class="btn-trash btn-sm">
+      <button @click="$emit('onRemove', movie.id)" type="button" class="btn-trash btn-sm">
         <i class="bi bi-trash"></i>
       </button>
 
