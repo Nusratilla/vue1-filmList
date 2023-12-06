@@ -1,8 +1,10 @@
 <template>
-  <ul class="movie-list list-group">
-    <MovieListItem v-for="movie in movies" v-bind:movie="movie" :key="movie.id" @onLike="$emit('onLike', movie.id)"
-      @onFavourite="$emit('onFavourite', movie.id)" @onRemove="$emit('onRemove', movie.id)" />
-  </ul>
+  <Box>
+    <ul class="list-group">
+      <MovieListItem v-for="movie in movies" v-bind:movie="movie" :key="movie.id" @onLike="$emit('onLike', movie.id)"
+        @onFavourite="$emit('onFavourite', movie.id)" @onRemove="$emit('onRemove', movie.id)" />
+    </ul>
+  </Box>
 </template>
 <script>
 import MovieListItem from "../Movie-list-item/MovieListItem.vue"
@@ -17,12 +19,4 @@ export default {
   }
 }
 </script>
-<style scoped>
-.movie-list {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background-color: #fff2d0;
-  border-radius: 4px;
-  box-shadow: 15px 15px 15px rgba(0, 0, 0, .15);
-}
-</style>
+<style scoped></style>

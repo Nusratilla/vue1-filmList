@@ -2,9 +2,12 @@
 <template >
   <li class="list-group-item d-flex justify-content-between"
     :class="[{ like: movie.like }, { favourite: movie.favourite }]">
-    <span @click="onLike" class="list-group-item-label">{{ movie.name }}</span>
+    <span class="list-group-item-label">{{ movie.name }}</span>
     <input type="number" class="list-group-item-input" v-bind:value="movie.viewers">
     <div class="d-flex justify-content-center align-items-center">
+
+      <button @click="onLike"><i class="bi bi-star-fill"></i></button>
+
       <button @click="$emit('onFavourite', movie.id)" type="button" class="btn-cookie btn-sm">
         <i class="bi bi-cookie"></i>
       </button>
@@ -13,7 +16,7 @@
         <i class="bi bi-trash"></i>
       </button>
 
-      <i class="bi bi-star-fill"></i>
+
     </div>
   </li>
 </template>
@@ -48,7 +51,7 @@ export default {
   line-height: 35px;
   font-size: 20px;
   width: 550px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .list-group-item input {
@@ -84,15 +87,16 @@ export default {
   text-align: center;
   line-height: 35px;
   font-size: 18px;
-  color: #ffd700;
+  color: #7e7e7e;
   transition: .3s all;
-  transform: translateX(30px);
-  opacity: 0;
+  /* transform: translateX(30px);
+  opacity: 0; */
 }
 
 .list-group-item.like .bi-star-fill {
   transform: translateX(0);
-  opacity: 1
+  opacity: 1;
+  color: hsl(0, 100%, 58%);
 }
 
 .list-group-item.favourite .list-group-item-label,

@@ -1,5 +1,5 @@
 <template >
-  <div class="movie-add-form">
+  <Box>
     <h3>Add New Movie</h3>
     <!-- <form class="add-form d-flex" @submit.prevent>  -->
     <form class="add-form d-flex">
@@ -9,7 +9,7 @@
         @input="viewed = $event.target.value">
       <PrimaryButton class="btn-outline-dark" type="submit" @click="addMovie">Add</PrimaryButton>
     </form>
-  </div>
+  </Box>
 </template>
 <script>
 export default {
@@ -39,11 +39,7 @@ export default {
 }
 </script>
 <style scoped>
-.movie-add-form {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background-color: #fff2d0;
-  border-radius: 4px;
-  box-shadow: 15px 15px 15px rgba(0, 0, 0, .15);
+.new-movie-label {
+  margin: 0 .5rem;
 }
 </style>

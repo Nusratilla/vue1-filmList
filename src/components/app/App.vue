@@ -3,10 +3,10 @@
   <div class="app font-monospace">
     <div class="content">
       <AppInfo :allMouviesCount="movies.length" :favouriteMoviesCount="movies.filter(c => c.favourite).length" />
-      <div class="search-panel">
+      <Box class="search-panel">
         <SearchPanel :updateTermHandler="updateTermHandler" />
         <AppFilter :updateFilterHandler="updateFilterHandler" :filterName="filter" />
-      </div>
+      </Box>
       <MovieList :movies="onFilterHandler(onSearchHandler(movies, term), filter)" @onLike="onLikeHandler"
         @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
       <MovieAddForm @createMovie="createMovie" />
@@ -28,7 +28,7 @@ export default {
     SearchPanel,
     AppFilter,
     MovieList,
-    MovieAddForm
+    MovieAddForm,
   },
   data() {
     return {
