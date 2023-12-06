@@ -7,7 +7,7 @@
         v-on:input="name = $event.target.value">
       <input type="number" class="new-movie-label form-control" placeholder="Viewed" :value="viewed"
         @input="viewed = $event.target.value">
-      <button class="btn btn-outline-dark" type="submit" @click="addMovie">Add</button>
+      <PrimaryButton class="btn-outline-dark" type="submit" @click="addMovie">Add</PrimaryButton>
     </form>
   </div>
 </template>

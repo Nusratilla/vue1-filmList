@@ -1,8 +1,8 @@
 <template>
-  <div class="app-info">
+  <Box>
     <p class="fs3 text-uppercase">All Movies: {{ allMouviesCount }}</p>
     <p class="fs4 text-uppercase">Favourite Movies: {{ favouriteMoviesCount }}</p>
-  </div>
+  </Box>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
       type: Number,
       required: true,
     }
-  }
+  },
 }
 </script>
 
