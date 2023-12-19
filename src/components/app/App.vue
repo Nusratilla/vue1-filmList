@@ -7,11 +7,16 @@
         <SearchPanel :updateTermHandler="updateTermHandler" />
         <AppFilter :updateFilterHandler="updateFilterHandler" :filterName="filter" />
       </Box>
-      <MovieList :movies="onFilterHandler(onSearchHandler(movies, term), filter)" @onLike="onLikeHandler"
+      <Box v-if="!movies.length && !isLoading">
+        <p class="text-center fs-4 text-danger">List of Movies is Empty!</p>
+      </Box>
+      <Box v-else-if="isLoading">
+        <p class="text-center fs-3">Loading...</p>
+      </Box>
+      <MovieList v-else :movies="onFilterHandler(onSearchHandler(movies, term), filter)" @onLike="onLikeHandler"
         @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
       <MovieAddForm @createMovie="createMovie" />
       <TrainTo />
-      <PrimaryButton class="btn-outline-dark" @click="fetchMovie">Hello Train</PrimaryButton>
     </div>
   </div>
 </template>
@@ -35,31 +40,10 @@ export default {
   },
   data() {
     return {
-      movies: [
-        {
-          name: 'Omar',
-          viewers: 875,
-          favourite: false,
-          like: true,
-          id: 1
-        },
-        {
-          name: 'Amir Temur',
-          viewers: 451,
-          favourite: true,
-          like: false,
-          id: 2
-        },
-        {
-          name: 'Babur',
-          viewers: 753,
-          favourite: true,
-          like: true,
-          id: 3
-        }
-      ],
+      movies: [],
       term: "",
       filter: 'all',
+      isLoading: false,
     }
   },
   methods: {
@@ -109,13 +93,35 @@ export default {
     },
     async fetchMovie() {
       try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-        console.log(response);
+        this.isLoading = true
+        setTimeout(async () => {
+          // will take whole info 
+          // const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+          // console.log(response);
+          // will take only data 
+          const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+          const newArr = data.map(item => ({
+            id: item.id,
+            name: item.title,
+            viewers: item.id * 114,
+            favourite: false,
+            like: false,
+          }))
+          this.movies = newArr
+          this.isLoading = false
+        }, 3000)
+
       } catch (error) {
         alert(error.message);
       }
+      // finally {
+      //   this.isLoading = false
+      // }
     },
-  }
+  },
+  mounted() {
+    this.fetchMovie()
+  },
 }
 </script>
 
