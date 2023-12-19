@@ -11,8 +11,8 @@
         @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
       <MovieAddForm @createMovie="createMovie" />
       <TrainTo />
+      <PrimaryButton class="btn-outline-dark" @click="fetchMovie">Hello Train</PrimaryButton>
     </div>
-
   </div>
 </template>
 
@@ -23,6 +23,7 @@ import AppFilter from "../app-filter/AppFilter.vue"
 import MovieList from '../movie-list/MovieList.vue'
 import MovieAddForm from '../movie-add-form/MovieAddForm.vue'
 import TrainTo from '../Train-to/trainTo.vue'
+import axios from 'axios'
 export default {
   components: {
     AppInfo,
@@ -105,8 +106,16 @@ export default {
     },
     updateFilterHandler(filter) {
       this.filter = filter
-    }
-  },
+    },
+    async fetchMovie() {
+      try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+        console.log(response);
+      } catch (error) {
+        alert(error.message);
+      }
+    },
+  }
 }
 </script>
 
