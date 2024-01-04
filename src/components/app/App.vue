@@ -128,7 +128,7 @@ export default {
 <style>
 .app {
   height: 100vh;
-  color: black;
+  color: rgb(0, 0, 0);
 }
 
 .content {
