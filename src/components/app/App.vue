@@ -104,8 +104,8 @@ export default {
             id: item.id,
             name: item.title,
             viewers: item.id * 114,
-            favourite: false,
-            like: false,
+            favourite: true,
+            like: true,
           }))
           this.movies = newArr
           this.isLoading = false
