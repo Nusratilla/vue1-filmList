@@ -10,8 +10,8 @@
       <Box v-if="!movies.length && !isLoading">
         <p class="text-center fs-4 text-danger">List of Movies is Empty!</p>
       </Box>
-      <Box v-else-if="isLoading">
-        <p class="text-center fs-3">Loading...</p>
+      <Box v-else-if="isLoading" class="d-flex justify-content-center">
+        <Loader />
       </Box>
       <MovieList v-else :movies="onFilterHandler(onSearchHandler(movies, term), filter)" @onLike="onLikeHandler"
         @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
@@ -94,29 +94,31 @@ export default {
     async fetchMovie() {
       try {
         this.isLoading = true
-        setTimeout(async () => {
-          // will take whole info 
-          // const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-          // console.log(response);
-          // will take only data 
-          const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-          const newArr = data.map(item => ({
-            id: item.id,
-            name: item.title,
-            viewers: item.id * 114,
-            favourite: true,
-            like: true,
-          }))
-          this.movies = newArr
-          this.isLoading = false
-        }, 3000)
+        // setTimeout(async () => {
+
+        // will take whole info 
+        // const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+        // console.log(response);
+        // will take only data 
+        const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+        const newArr = data.map(item => ({
+          id: item.id,
+          name: item.title,
+          viewers: item.id * 114,
+          favourite: false,
+          like: false,
+        }))
+        this.movies = newArr
+
+        // this.isLoading = false
+        // }, 3000)
 
       } catch (error) {
         alert(error.message);
       }
-      // finally {
-      //   this.isLoading = false
-      // }
+      finally {
+        this.isLoading = false
+      }
     },
   },
   mounted() {
