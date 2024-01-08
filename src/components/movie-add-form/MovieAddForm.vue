@@ -28,7 +28,8 @@ export default {
         viewers: this.viewed,
         favourite: false,
         like: true,
-        id: Date.now()
+        // if we work with server no need to add ID genereter coz server will add it automatically 
+        // id: Date.now() 
       }
       this.$emit("createMovie", newMovie)
       this.name = ''

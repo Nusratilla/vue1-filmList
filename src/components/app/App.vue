@@ -16,8 +16,8 @@
       <MovieList v-else :movies="onFilterHandler(onSearchHandler(movies, term), filter)" @onLike="onLikeHandler"
         @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
 
-      <Pagination :onPageHandler="changePageHandler" />
-      <!-- <Box class="d-flex justify-content-center">
+      <!-- <Pagination :onPageHandler="changePageHandler" /> -->
+      <Box class="d-flex justify-content-center">
         <nav aria-label="pagination">
           <ul class="pagination pagination-sm">
             <li v-for="pageNumber in  totalPages " :key="pageNumber" :class="{ active: pageNumber === page }"
@@ -26,7 +26,7 @@
             </li>
           </ul>
         </nav>
-      </Box> -->
+      </Box>
 
       <MovieAddForm @createMovie="createMovie" />
       <TrainTo />
@@ -42,7 +42,7 @@ import MovieList from '../movie-list/MovieList.vue'
 import MovieAddForm from '../movie-add-form/MovieAddForm.vue'
 import TrainTo from '../Train-to/trainTo.vue'
 import axios from 'axios'
-import Pagination from '../pagination/Pagination.vue'
+// import Pagination from '../pagination/Pagination.vue'
 export default {
   components: {
     AppInfo,
@@ -51,7 +51,7 @@ export default {
     MovieList,
     MovieAddForm,
     TrainTo,
-    Pagination,
+    // Pagination,
   },
   data() {
     return {
@@ -65,8 +65,17 @@ export default {
     }
   },
   methods: {
-    createMovie(item) {
-      this.movies.push(item)
+    // createMovie(item) {
+    //   this.movies.push(item)
+    // },
+    async createMovie(item) {
+      try {
+        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', item)
+        this.movies.push(response.data)
+      } catch (error) {
+        alert(error.message)
+      }
+
     },
     onLikeHandler(id) {
       this.movies = this.movies.map(item => {
@@ -84,8 +93,17 @@ export default {
         return item
       })
     },
-    onRemoveHandler(id) {
-      this.movies = this.movies.filter(c => c.id !== id)
+    // onRemoveHandler(id) {
+    //   this.movies = this.movies.filter(c => c.id !== id)
+    // },
+    async onRemoveHandler(id) {
+      try {
+        const response = await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        console.log(response);
+        this.movies = this.movies.filter(c => c.id !== id)
+      } catch (error) {
+        alert(error.message)
+      }
     },
     onSearchHandler(arr, term) {
       if (term.length == 0) {
