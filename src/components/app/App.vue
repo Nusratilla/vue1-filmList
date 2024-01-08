@@ -15,6 +15,18 @@
       </Box>
       <MovieList v-else :movies="onFilterHandler(onSearchHandler(movies, term), filter)" @onLike="onLikeHandler"
         @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
+
+      <Box class="d-flex justify-content-center">
+        <nav aria-label="pagination">
+          <ul class="pagination pagination-sm">
+            <li v-for="pageNumber in  totalPages " :key="pageNumber" :class="{ active: pageNumber === page }"
+              @click="changePageHandler(pageNumber)">
+              <span class="page-link">{{ pageNumber }}</span>
+            </li>
+          </ul>
+        </nav>
+      </Box>
+
       <MovieAddForm @createMovie="createMovie" />
       <TrainTo />
     </div>
@@ -44,6 +56,9 @@ export default {
       term: "",
       filter: 'all',
       isLoading: false,
+      limit: 10,
+      page: 1,
+      totalPages: 0,
     }
   },
   methods: {
@@ -91,23 +106,28 @@ export default {
     updateFilterHandler(filter) {
       this.filter = filter
     },
+    changePageHandler(page) {
+      this.page = page
+    },
     async fetchMovie() {
       try {
         this.isLoading = true
         // setTimeout(async () => {
 
-        // will take whole info 
-        // const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-        // console.log(response);
-        // will take only data 
-        const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-        const newArr = data.map(item => ({
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+          params: {
+            _limit: this.limit,
+            _page: this.page,
+          }
+        })
+        const newArr = response.data.map(item => ({
           id: item.id,
           name: item.title,
-          viewers: item.id * 114,
+          viewers: item.id * 10,
           favourite: false,
           like: false,
         }))
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
         this.movies = newArr
 
         // this.isLoading = false
