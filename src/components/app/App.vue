@@ -106,9 +106,6 @@ export default {
     updateFilterHandler(filter) {
       this.filter = filter
     },
-    changePageHandler(page) {
-      this.page = page
-    },
     async fetchMovie() {
       try {
         this.isLoading = true
@@ -140,10 +137,18 @@ export default {
         this.isLoading = false
       }
     },
+    changePageHandler(page) {
+      this.page = page
+    },
   },
   mounted() {
     this.fetchMovie()
   },
+  watch: {
+    page() {
+      this.fetchMovie()
+    }
+  }
 }
 </script>
 
