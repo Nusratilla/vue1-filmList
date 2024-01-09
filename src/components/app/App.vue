@@ -2,7 +2,8 @@
 <template>
   <div class="app font-monospace">
     <div class="content">
-      <AppInfo :allMouviesCount="movies.length" :favouriteMoviesCount="movies.filter(c => c.favourite).length" />
+      <AppInfo :allMouviesCount="movies.length" :favouriteMoviesCount="movies.filter(c => c.favourite).length"
+        :likeMoviesCount="movies.filter(c => c.like).length" />
       <Box class="search-panel">
         <SearchPanel :updateTermHandler="updateTermHandler" />
         <AppFilter :updateFilterHandler="updateFilterHandler" :filterName="filter" />

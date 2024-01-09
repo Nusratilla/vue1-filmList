@@ -2,6 +2,7 @@
   <Box>
     <p class="fs3 text-uppercase">All Movies: {{ allMouviesCount }}</p>
     <p class="fs4 text-uppercase">Favourite Movies: {{ favouriteMoviesCount }}</p>
+    <p class="fs4 text-uppercase">Liked Movies: {{ likeMoviesCount }}</p>
   </Box>
 </template>
 
@@ -13,6 +14,10 @@ export default {
       required: true,
     },
     favouriteMoviesCount: {
+      type: Number,
+      required: true,
+    },
+    likeMoviesCount: {
       type: Number,
       required: true,
     }
