@@ -15,8 +15,6 @@
       <button @click="$emit('onRemove', movie.id)" type="button" class="btn-trash btn-sm">
         <i class="bi bi-trash"></i>
       </button>
-
-
     </div>
   </li>
 </template>

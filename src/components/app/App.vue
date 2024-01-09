@@ -17,12 +17,12 @@
         @onFavourite="onFavouriteHandler" @onRemove="onRemoveHandler" />
 
       <!-- <Pagination :onPageHandler="changePageHandler" /> -->
-      <Box class="d-flex justify-content-center">
+      <Box class="pagination-box d-flex justify-content-center">
         <nav aria-label="pagination">
-          <ul class="pagination pagination-sm">
-            <li v-for="pageNumber in  totalPages " :key="pageNumber" :class="{ active: pageNumber === page }"
-              @click="changePageHandler(pageNumber)">
-              <span class="page-link">{{ pageNumber }}</span>
+          <ul class="pagination pagination-sm ">
+            <li class="page-item" v-for=" pageNumber in totalPages " :key="pageNumber"
+              :class="{ active: pageNumber === page }" @click="changePageHandler(pageNumber)">
+              <span class="page-link border-dark-subtle">{{ pageNumber }}</span>
             </li>
           </ul>
         </nav>
@@ -193,5 +193,23 @@ export default {
   background-color: #fff2d0;
   border-radius: 4px;
   box-shadow: 15px 15px 15px rgba(0, 0, 0, .15);
+}
+
+.pagination {
+  cursor: pointer;
+}
+
+.page-link {
+  color: #000000;
+}
+
+.page-link:hover {
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+}
+
+.active>.page-link {
+  background-color: rgb(0, 0, 0);
+  color: #fff;
 }
 </style>
