@@ -13,7 +13,7 @@ export default {
   margin: 2rem 0;
   padding: 1.5rem;
   background-color: #d0ffcc;
-  border-radius: 4px;
+  border-radius: 0.2rem;
   box-shadow: 15px 15px 15px rgba(0, 0, 0, .25);
 }
 </style>
